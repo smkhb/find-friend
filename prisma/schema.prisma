@@ -13,3 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model ORG {
+  id          String   @id @default(cuid())
+  name        String
+  email       String   @unique
+  password    String
+  whatsapp    String
+  address     String
+  created_at  DateTime @default(now())
+  Pets         Pet[]
+
+  @@map("orgs")
+}
+
+model Pet {
+  id          String   @id @default(cuid())
+  name        String
+  age         Int
+  city        String
+  created_at  DateTime @default(now())
+
+  org_id String
+  org    ORG    @relation(fields: [org_id], references: [id])
+
+  @@map("pets")
+}
