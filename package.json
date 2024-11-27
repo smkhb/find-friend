@@ -4,7 +4,12 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
-    "build": "tsup src --out-dir build"
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:covarege": "vitest run --coverage",
+    "test:ui": "vitest run --ui"
   },
   "keywords": [],
   "author": "",
@@ -21,10 +26,13 @@
   "dependencies": {
     "@prisma/client": "5.22.0",
     "@types/bcryptjs": "2.4.6",
+    "@vitest/ui": "2.1.6",
     "bcryptjs": "2.4.3",
     "dotenv": "16.4.5",
     "fastify": "5.1.0",
     "prisma": "5.22.0",
+    "vite-tsconfig-paths": "5.1.3",
+    "vitest": "2.1.6",
     "zod": "3.23.8"
   }
 }
