@@ -25,6 +25,12 @@ export class CreateORGUseCase {
     address,
   }: createRequest): Promise<createResponse> {
     const passwordHash = await hash(password, 6)
+    const orgAlreadyExists = await this.oRGSRepository.findByEmail(email)
+
+    if (orgAlreadyExists) {
+      throw new Error('ORG already registered')
+    }
+
     const org = await this.oRGSRepository.create({
       name,
       email,
