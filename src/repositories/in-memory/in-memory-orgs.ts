@@ -3,6 +3,7 @@ import { ORGSRepository } from '../orgs-repository'
 
 export class InMemoryORGSRepository implements ORGSRepository {
   public items: ORG[] = []
+
   async findByEmail(email: string): Promise<ORG | null> {
     const org = this.items.find((item) => item.email === email)
 
@@ -24,6 +25,15 @@ export class InMemoryORGSRepository implements ORGSRepository {
     }
 
     this.items.push(org)
+    return org
+  }
+
+  async findByID(id: string): Promise<ORG | null> {
+    const org = this.items.find((item) => item.id === id)
+
+    if (!org) {
+      return null
+    }
     return org
   }
 }
