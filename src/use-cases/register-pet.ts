@@ -1,7 +1,7 @@
 import { ORGSRepository } from '@/repositories/orgs-repository'
 import { Pet } from '@prisma/client'
 import { PetsRepository } from '@/repositories/pets-repository'
-import { ORGADoesNotExistsError } from './errors/org-does-not-exist'
+import { ORGDoesNotExistsError } from './errors/org-does-not-exist'
 
 interface registerRequest {
   name: string
@@ -29,7 +29,7 @@ export class RegisterPetUseCase {
     const doesORGExists = await this.oRGSRepository.findByID(orgID)
 
     if (!doesORGExists) {
-      throw new ORGADoesNotExistsError()
+      throw new ORGDoesNotExistsError()
     }
 
     const pet = await this.petsRepository.register({
