@@ -27,8 +27,10 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
-  findByCity(city: string): Promise<Pet[]> {
-    const pets = this.items.filter((item) => item.city === city)
+  findManyByCity(city: string, page: number): Promise<Pet[]> {
+    const pets = this.items
+      .filter((item) => item.city === city)
+      .slice((page - 1) * 10, page * 10)
 
     return Promise.resolve(pets)
   }

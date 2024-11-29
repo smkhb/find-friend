@@ -4,7 +4,12 @@ import { prisma } from '@/lib/prisma'
 
 export class PrismaORGSRepository implements ORGSRepository {
   findByID(id: string): Promise<ORG | null> {
-    throw new Error(id) // TODO: Implement
+    const org = prisma.oRG.findUnique({
+      where: {
+        id,
+      },
+    })
+    return org
   }
 
   async findByEmail(email: string): Promise<ORG | null> {
