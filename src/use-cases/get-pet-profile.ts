@@ -10,7 +10,7 @@ interface getProfileResponse {
   pet: Pet
 }
 
-export class GetProfileUseCase {
+export class GetPetProfileUseCase {
   constructor(private petsRepository: PetsRepository) {}
 
   async execute({ petID }: getProfileRequest): Promise<getProfileResponse> {
