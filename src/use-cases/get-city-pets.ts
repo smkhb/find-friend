@@ -1,5 +1,6 @@
 import { PetsRepository } from '@/repositories/pets-repository'
 import { Pet } from '@prisma/client'
+import { PetsNotFoundError } from './errors/pets-not-found'
 
 interface getCityPetsRequest {
   city: string
@@ -18,7 +19,9 @@ export class GetCityPetsUseCase {
     page,
   }: getCityPetsRequest): Promise<getCityPetsResponse> {
     const pets = await this.petsRepository.findManyByCity(city, page || 1)
-
+    if (!pets) {
+      throw new PetsNotFoundError()
+    }
     return { pets }
   }
 }
