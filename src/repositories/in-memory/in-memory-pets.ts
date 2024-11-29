@@ -32,4 +32,18 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     return Promise.resolve(pets)
   }
+
+  filterByAttributes(attributes: Prisma.PetWhereInput): Promise<Pet[]> {
+    const { city, age } = attributes
+
+    if (city && age) {
+      const pets = this.items.filter(
+        (item) => item.city === city && item.age === age,
+      )
+      return Promise.resolve(pets)
+    }
+    const pets = this.items.filter((item) => item.city === city)
+
+    return Promise.resolve(pets)
+  }
 }
