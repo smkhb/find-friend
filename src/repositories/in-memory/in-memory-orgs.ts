@@ -1,4 +1,4 @@
-import { Prisma, ORG } from '@prisma/client'
+import { Prisma, ORG, Role } from '@prisma/client'
 import { ORGSRepository } from '../orgs-repository'
 
 export class InMemoryORGSRepository implements ORGSRepository {
@@ -21,6 +21,7 @@ export class InMemoryORGSRepository implements ORGSRepository {
       password: data.password,
       whatsapp: data.whatsapp,
       address: data.address,
+      role: 'ADMIN' as Role,
       created_at: new Date(),
     }
 

@@ -7,11 +7,14 @@ let inMemoryPetsRepository: InMemoryPetsRepository
 let inMemoryORGSRepository: InMemoryORGSRepository
 let getPetProfileUseCase: GetPetProfileUseCase
 
-describe('Get Profile Use Case', () => {
+describe('Get Pet Profile Use Case', () => {
   beforeEach(async () => {
     inMemoryPetsRepository = new InMemoryPetsRepository()
     inMemoryORGSRepository = new InMemoryORGSRepository()
-    getPetProfileUseCase = new GetPetProfileUseCase(inMemoryPetsRepository)
+    getPetProfileUseCase = new GetPetProfileUseCase(
+      inMemoryPetsRepository,
+      inMemoryORGSRepository,
+    )
 
     const org = await inMemoryORGSRepository.create({
       name: 'ORG Name',
@@ -31,7 +34,10 @@ describe('Get Profile Use Case', () => {
   })
 
   it('should be able to get a pet profile', async () => {
-    const { pet } = await getPetProfileUseCase.execute({ petID: 'pet-1' })
+    const { pet } = await getPetProfileUseCase.execute({
+      petID: 'pet-1',
+      orgID: 'org-1',
+    })
 
     expect(pet.name).toEqual('Pet Name')
     expect(pet.id).toEqual('pet-1')
