@@ -6,7 +6,7 @@ export async function profile(request: FastifyRequest, reply: FastifyReply) {
   const petProfileParamsSchema = z.object({
     petID: z.string().cuid(),
   })
-  const { petID } = petProfileParamsSchema.parse(request.query)
+  const { petID } = petProfileParamsSchema.parse(request.params)
   const getPetProfile = getPetProfileFactory()
 
   const pet = await getPetProfile.execute({
